@@ -130,7 +130,20 @@
         .img-frame { height: 350px; }
         .btn-secondary { margin-left: 0; margin-top: 10px; width: 100%; text-align: center;}
         .btn-primary { width: 100%; }
-        header { padding: 20px; }
+        header { padding: 20px; flex-wrap: wrap; gap: 10px; }
+        .logo-link { font-size: 20px; }
+        .description { font-size: 1rem; }
+        #featureTitle { font-size: 1.8rem; }
+        #featureDesc { font-size: 1rem; }
+        /* Las flechas quedaban a medias afuera del contenedor y se recortaban con overflow-x:hidden */
+        .arrow { width: 38px; height: 38px; font-size: 16px; }
+        .arrow-left { left: 5px; }
+        .arrow-right { right: 5px; }
+      }
+
+      @media (max-width: 420px) {
+        h1 { font-size: 1.7rem; }
+        .img-frame { height: 220px; }
       }
     </style>
 </head>

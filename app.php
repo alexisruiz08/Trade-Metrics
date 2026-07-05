@@ -112,7 +112,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       gap: 8px;
       margin-top: 10px;
   }
-  
+
+  /* Antes esto era un inline-style fijo a 3 columnas: en celular quedaban tarjetas de ~100px */
+  .metrics-3col { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 700px) { .metrics-3col { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px) { .metrics-3col { grid-template-columns: 1fr; } }
+
   .ticker-item.up .arrow { color: var(--accent); }
   .ticker-item.down .arrow { color: var(--danger); }
 
@@ -263,13 +268,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* Media query para pantallas muy pequeñas (Móvil vertical) */
   @media (max-width: 768px) {
-      body { padding-left: 0; padding-bottom: 60px; } 
+      body { padding-left: 0; padding-bottom: 60px; }
       .sidebar { width: 100%; height: 60px; bottom: 0; top: auto; flex-direction: row; justify-content: space-around; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
       .sidebar-logo { display: none; }
       .nav-item { margin-bottom: 0; }
-      .nav-item::after { display: none; } 
+      .nav-item::after { display: none; }
       .wrap { width: 92%; margin-left: auto; margin-right: auto; }
       header h1 { font-size: 24px; }
+      header { margin-left: 0 !important; }
+      header img { width: 56px; height: 56px; }
+      header h1 span:first-child { font-size: 26px !important; }
+
+      /* Los gráficos con alto fijo grande (550/500/400px) quedaban desproporcionados en celular */
+      .chart-container .card[style*="height: 550px"] { height: 380px !important; }
+      .row-container .card[style*="min-height: 500px"],
+      .row-container .card[style*="min-height: 400px"] { min-height: 320px !important; }
   }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -423,7 +436,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
 
-        <div class="metrics" style="grid-template-columns: repeat(3, 1fr); margin-top:0;">
+        <div class="metrics metrics-3col" style="margin-top:0;">
             <div class="metric"><small class="small">Win Rate (wins / total)</small><b id="winRate">—</b><div class="small"></div></div>
             <div class="metric"><small class="small">Expectancy ($ por operación)</small><b id="expectancy">—</b></div>
             <div class="metric"><small class="small">Profit Factor</small><b id="profitFactor">—</b></div>
@@ -459,7 +472,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
-    <div class="row-container" style="display: grid; margin-top: 150px; grid-template-columns: 1fr 1fr; gap: 18px;">
+    <div class="row-container grid-dual-charts" style="margin-top: 150px;">
         
         <div class="card" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); min-height: 400px; padding:10px;"> 
             <div class="chart-card-content">

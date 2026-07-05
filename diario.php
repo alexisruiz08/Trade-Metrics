@@ -209,7 +209,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .max-w-7xl {
             max-width: 90rem !important;  /* 90rem = 1440px aprox. */
         }
-        
+
+        /* En celular, la sidebar fija de 80px pasa a ser una barra inferior (igual que app.php) */
+        @media (max-width: 768px) {
+            body { padding-left: 0; padding-bottom: 60px; }
+            .sidebar {
+                width: 100%; height: 60px; top: auto; bottom: 0;
+                flex-direction: row; justify-content: space-around;
+                border-right: none; border-top: 1px solid rgba(255,255,255,0.05);
+            }
+            .sidebar-logo { display: none; }
+            .nav-item { margin-bottom: 0; }
+            .nav-item::after { display: none; }
+            .calendar-wrapper { width: 94%; }
+        }
+
     </style>
 </head>
 <body>
