@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/session_bootstrap.php';
+start_secure_session();
 header('Content-Type: application/json');
 
 // Desactiva mostrar errores en el JSON para no romper el formato, pero repórtalos internamente

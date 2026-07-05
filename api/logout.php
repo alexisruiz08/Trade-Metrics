@@ -1,6 +1,7 @@
 <?php
 // Iniciar la sesión para poder acceder a ella
-session_start();
+require_once __DIR__ . '/session_bootstrap.php';
+start_secure_session();
 
 // Destruir todas las variables de sesión
 $_SESSION = array();

@@ -17,11 +17,13 @@ $conn->set_charset("utf8");
 
 // Verificar conexión
 if ($conn->connect_error) {
-    // Si la conexión falla, se envía una respuesta de error en JSON y se termina el script.
+    // No exponemos el detalle real del error (host, driver, etc.) al cliente.
+    error_log('DB connection failed: ' . $conn->connect_error);
     header('Content-Type: application/json');
+    http_response_code(500);
     echo json_encode([
-        'success' => false, 
-        'message' => 'Connection failed: ' . $conn->connect_error
+        'success' => false,
+        'message' => 'Error interno del servidor.'
     ]);
     exit();
 }

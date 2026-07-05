@@ -1,4 +1,0 @@
-# Desactivar el firewall (ModSecurity) SOLO para esta carpeta
-<IfModule mod_security2.c>
-    SecRuleEngine Off
-</IfModule>

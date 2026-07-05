@@ -3,7 +3,9 @@
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
 header("Pragma: no-cache"); // HTTP 1.0.
 header("Expires: 0"); // Proxies.
-session_start();
+require_once __DIR__ . '/api/session_bootstrap.php';
+require_once __DIR__ . '/api/csrf.php';
+start_secure_session();
 
 // Si el usuario no ha iniciado sesión, lo echamos al login.
 if (!isset($_SESSION['user_id'])) {
@@ -12,6 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+$csrfToken = csrf_token();
 
 // --- OBTENER TOKEN ---
 require_once 'api/db_connect.php';
@@ -334,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <input id="current_password" type="password" required>
 
                 <label>Nueva Contraseña</label>
-                <input id="new_password" type="password" required>
+                <input id="new_password" type="password" minlength="8" required>
 
                 <label>Confirmar Nueva Contraseña</label>
                 <input id="confirm_password" type="password" required>
@@ -666,6 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =======================================================
     
     const API_URL = 'api/';
+    const CSRF_TOKEN = <?= json_encode($csrfToken) ?>;
 
     // NUEVO: Cargar lista de cuentas (account_tag)
     const loadAccounts = async function() {
@@ -707,7 +711,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // =======================================================
     
     const q = (id) => document.getElementById(id);
-    const fmt = (n, dec=2) => (n === null || isNaN(n)) ? '—' : Number(n).toFixed(dec); 
+    const fmt = (n, dec=2) => (n === null || isNaN(n)) ? '—' : Number(n).toFixed(dec);
+    const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[c]); 
     const parseFloatSafe = (v) => { const n = parseFloat(v); return isFinite(n) ? n : null; };
 
     let allTransactions = []; 
@@ -831,14 +838,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const r_multiples = N_risk > 0 ? tradesWithRisk.map(tx => tx.amount / tx.risk_r) : [];
       
       const rWins = r_multiples.filter(r => r > 0);
-      
-      // --- ¡CORRECCIÓN v2.4! ---
-      // Las "no-ganancias" (pérdidas Y breakeven) se agrupan.
-      const rLosses = r_multiples.filter(r => r <= 0); 
-      // --- FIN CORRECCIÓN ---
-      
+
+      // Solo pérdidas reales (r < 0): un breakeven (r === 0) no debe diluir la pérdida
+      // promedio, o Kelly termina sobreestimando cuánto arriesgar por operación.
+      const rLosses = r_multiples.filter(r => r < 0);
+
       const rWinRate = N_risk > 0 ? rWins.length / N_risk : 0;
-      
+
       const avgWinR = rWins.length ? rWins.reduce((s, r) => s + r, 0) / rWins.length : 0;
       const avgLossR = rLosses.length ? Math.abs(rLosses.reduce((s, r) => s + r, 0)) / rLosses.length : 0;
       
@@ -919,7 +925,11 @@ txsToLoop.forEach(tx => {
         }
         currentValley = Math.min(currentValley, tx.balance_after); // Actualizar valle después del trade
         if (peakEquity > 0) currentMaxDD = Math.max(currentMaxDD, (peakEquity - currentValley) / peakEquity);
-        
+        // maxDDUSD también se recalcula acá: si no, cuando el trade que genera el peor
+        // drawdown es el último de la serie, se queda con el valle viejo (uno atrás) y
+        // subestima el drawdown en $, arrastrando mal a Recovery Factor.
+        maxDDUSD = Math.max(maxDDUSD, peakEquity - currentValley);
+
         // Calcular Drawdown actual %
         let currentDrawdownPct = (peakEquity > 0) ? ((tx.balance_after - peakEquity) / peakEquity) * 100 : 0;
         drawdownSeries.push(currentDrawdownPct);
@@ -960,14 +970,22 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
         updateEquityDisplay(0, 0);
       }
 
-      // --- E. Preparar datos para gráficos (Sin Cambios) ---
+      // --- E. Preparar datos para gráficos ---
+      // Distribución y scatter de R necesitan risk_r, así que siguen limitados a tradesWithRisk.
       const tradesForCharts = tradesWithRisk.map((tx, i) => ({
           profitUSD: tx.amount,
-          profitPct: tx.risk_r !== 0 ? (tx.amount / tx.risk_r) * 100 : 0, 
-          profitR: r_multiples[i], 
+          profitPct: tx.risk_r !== 0 ? (tx.amount / tx.risk_r) * 100 : 0,
+          profitR: r_multiples[i],
           date: tx.timestamp.split(' ')[0]
       }));
-      
+
+      // El PnL mensual solo necesita profitUSD y fecha, no risk_r: debe incluir TODOS los
+      // trades del período para no subestimar el resultado real frente a las métricas de cabecera.
+      const tradesForMonthlyChart = allTradesInPeriod.map(tx => ({
+          profitUSD: tx.amount,
+          date: tx.timestamp.split(' ')[0]
+      }));
+
       // Calcular PnL por Día de la Semana
       const dayPnL = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0};
       allTradesInPeriod.forEach(tx => {
@@ -991,7 +1009,10 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
           // Métricas de P/L ($) - Basadas en N = allTrades_N
           N: allTrades_N,
           totalWins: `${dollarWins.length} / ${allTrades_N}`,
-          winRate: dollarWinRate, 
+          winRate: dollarWinRate,
+          winCount: dollarWins.length,
+          lossCount: dollarLosses.length,
+          breakevenCount: allTrades_N - dollarWins.length - dollarLosses.length,
           expectancy: expectancy, 
           profitFactor: profitFactor,
           avgWinLossRatio: avgWinLossRatio,
@@ -1010,6 +1031,7 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
           expectancyR: expectancyR, 
           
           tradesForCharts: tradesForCharts,
+          tradesForMonthlyChart: tradesForMonthlyChart,
           dayPnL: dayPnL,
           longPnL: longPnL,
           shortPnL: shortPnL,
@@ -1069,10 +1091,10 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
             }
 
             trEl.innerHTML = `
-                <td>${tx.ticket}</td>
-                <td>${tx.timestamp}</td>
-                <td>${typeDisplay}</td>
-                <td>${tx.symbol || '—'}</td>
+                <td>${escapeHtml(tx.ticket)}</td>
+                <td>${escapeHtml(tx.timestamp)}</td>
+                <td>${escapeHtml(typeDisplay)}</td>
+                <td>${escapeHtml(tx.symbol) || '—'}</td>
                 <td>${amountCellHtml}</td>
                 <td>${fmt(tx.balance_after, 2)}</td>
                 <td>${riskHtml}</td>
@@ -1441,16 +1463,28 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
         if (!ctx) return;
         if (winLossPieChartInstance) winLossPieChartInstance.destroy(); 
 
-        const winRate = m.winRate * 100;
-        const lossRate = (1 - m.winRate) * 100;
+        // Antes "lossRate" era 1 - winRate, lo que metía los trades en breakeven
+        // (PnL = 0) dentro de "Perdedoras". Acá los separamos en su propia porción.
+        const winPct = m.N > 0 ? (m.winCount / m.N) * 100 : 0;
+        const lossPct = m.N > 0 ? (m.lossCount / m.N) * 100 : 0;
+        const breakevenPct = m.N > 0 ? (m.breakevenCount / m.N) * 100 : 0;
+
+        const labels = ['Ganadoras', 'Perdedoras'];
+        const data = [winPct, lossPct];
+        const colors = [COLOR_ACCENT_HEX, COLOR_DANGER_HEX];
+        if (m.breakevenCount > 0) {
+            labels.push('Breakeven');
+            data.push(breakevenPct);
+            colors.push(COLOR_MUTED);
+        }
 
         winLossPieChartInstance = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Ganadoras', 'Perdedoras'],
+                labels: labels,
                 datasets: [{
-                    data: [winRate, lossRate],
-                    backgroundColor: [COLOR_ACCENT_HEX, COLOR_DANGER_HEX],
+                    data: data,
+                    backgroundColor: colors,
                     hoverOffset: 4,
                     borderColor: COLOR_BG_DARK
                 }]
@@ -1684,7 +1718,7 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
           renderDistributionChart(m.tradesForCharts);
           renderWinLossPieChart(m);
           renderRScatterChart(m.tradesForCharts); 
-          renderMonthlyPnlChart(m.tradesForCharts);
+          renderMonthlyPnlChart(m.tradesForMonthlyChart);
           // NUEVOS GRÁFICOS
           renderDayOfWeekChart(m.dayPnL);
           renderLongShortChart(m.longPnL, m.shortPnL);
@@ -1743,7 +1777,7 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
                 const response = await fetch('api/change_password.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ current: current, new: newPass, confirm: confirmPass })
+                    body: JSON.stringify({ current: current, new: newPass, confirm: confirmPass, csrf_token: CSRF_TOKEN })
                 });
                 const result = await response.json();
                 if (result.success) {

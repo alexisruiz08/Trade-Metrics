@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . '/api/session_bootstrap.php';
+require_once __DIR__ . '/api/csrf.php';
+start_secure_session();
+$csrfToken = csrf_token();
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -53,6 +59,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2 style="text-align:center; margin-top:0;">Iniciar Sesión</h2>
             
             <form action="login_process.php" method="POST">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <div style="margin-bottom: 10px;">
                     <label>Email</label>
                     <input name="email" type="email" required>
@@ -65,9 +72,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </form>
 
             <?php
-            // Mostrar error si la URL contiene ?error=1
             if (isset($_GET['error'])) {
-                echo '<div class="error">Email o contraseña incorrectos.</div>';
+                if ($_GET['error'] === '2') {
+                    echo '<div class="error">Demasiados intentos. Probá de nuevo en unos minutos.</div>';
+                } else {
+                    echo '<div class="error">Email o contraseña incorrectos.</div>';
+                }
             }
             ?>
             

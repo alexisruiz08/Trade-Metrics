@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . '/api/session_bootstrap.php';
+require_once __DIR__ . '/api/csrf.php';
+start_secure_session();
+$csrfToken = csrf_token();
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -54,17 +60,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="card">
             <h2 style="text-align:center; margin-top:0;">Crear Cuenta</h2>
             <form id="registerForm">
+                <input type="hidden" id="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                 <div style="margin-bottom: 10px;">
                     <label>Email</label>
                     <input id="email" type="email" required>
                 </div>
                 <div style="margin-bottom: 10px;">
                     <label>Contraseña</label>
-                    <input id="password" type="password" required>
+                    <input id="password" type="password" minlength="8" required>
                 </div>
                 <div style="margin-bottom: 15px;">
                     <label>Confirmar Contraseña</label>
-                    <input id="password_confirm" type="password" required>
+                    <input id="password_confirm" type="password" minlength="8" required>
                 </div>
                 <button type="submit" class="btn">Registrarse</button>
             </form>
@@ -89,12 +96,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 messageEl.className = 'error';
                 return;
             }
+            if (password.length < 8) {
+                messageEl.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+                messageEl.className = 'error';
+                return;
+            }
 
             try {
                 const response = await fetch('register_process.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email, password: password })
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        csrf_token: document.getElementById('csrf_token').value
+                    })
                 });
 
                 const result = await response.json();

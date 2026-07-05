@@ -1,0 +1,23 @@
+# Desactivar el firewall (ModSecurity) SOLO para esta carpeta
+<IfModule mod_security2.c>
+    SecRuleEngine Off
+</IfModule>
+
+# No exponer archivos internos por HTTP directo (solo se usan vía require/include)
+<FilesMatch "^(db_connect|session_bootstrap|csrf|rate_limiter)\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<FilesMatch "^(error_log|webhook_errors\.log|webhook_log\.txt)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</FilesMatch>

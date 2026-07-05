@@ -1,7 +1,9 @@
 <?php
 // api/change_password.php
-session_start();
-require 'db_connect.php'; 
+require_once __DIR__ . '/session_bootstrap.php';
+require_once __DIR__ . '/csrf.php';
+start_secure_session();
+require 'db_connect.php';
 header('Content-Type: application/json');
 
 // 1. Verificar que el usuario esté logueado
@@ -13,7 +15,7 @@ $user_id = $_SESSION['user_id'];
 
 // 2. Obtener datos del POST
 $data = json_decode(file_get_contents('php://input'), true);
-if (!$data || !isset($data['current']) || !isset($data['new']) || !isset($data['confirm'])) {
+if (!$data || !isset($data['current']) || !isset($data['new']) || !isset($data['confirm']) || !csrf_verify($data['csrf_token'] ?? null)) {
     echo json_encode(['success' => false, 'message' => 'Datos incompletos.']);
     exit;
 }
@@ -27,8 +29,8 @@ if ($new_pass !== $confirm_pass) {
     echo json_encode(['success' => false, 'message' => 'Las nuevas contraseñas no coinciden.']);
     exit;
 }
-if (strlen($new_pass) < 6) { // Opcional: largo mínimo
-    echo json_encode(['success' => false, 'message' => 'La contraseña debe tener al menos 6 caracteres.']);
+if (strlen($new_pass) < 8) {
+    echo json_encode(['success' => false, 'message' => 'La contraseña debe tener al menos 8 caracteres.']);
     exit;
 }
 
@@ -51,6 +53,9 @@ $stmt = $conn->prepare("UPDATE users SET password_hash = ? WHERE id = ?");
 $stmt->bind_param("si", $new_password_hash, $user_id);
 
 if ($stmt->execute()) {
+    // Invalida el ID de sesión actual: si alguien había fijado/robado la sesión,
+    // deja de servir apenas cambia la contraseña.
+    session_regenerate_id(true);
     echo json_encode(['success' => true, 'message' => 'Contraseña actualizada con éxito.']);
 } else {
     echo json_encode(['success' => false, 'message' => 'Error al actualizar la contraseña.']);

@@ -5,7 +5,8 @@
 $googleSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRcJ627hJGrJiOiHfAJyNZQWczsff_8InNB2i1B4dqqYfXBG-uKmhFbi3Mtc39biuaEjylIRJ6TFNf3/pub?gid=0&single=true&output=csv'; // Asegúrate de que termine en output=csv
 $cache_file = 'ticker_cache.json'; 
 
-header("Access-Control-Allow-Origin: *");
+// Este endpoint solo lo consume app.php del mismo origen (API_URL = 'api/'),
+// así que no hace falta abrir CORS a cualquier dominio.
 header('Content-Type: application/json; charset=UTF-8');
 
 // 2. Precios previos para las flechas en app.php
@@ -24,7 +25,8 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $googleSheetUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
 $csvContent = curl_exec($ch);
 curl_close($ch);
