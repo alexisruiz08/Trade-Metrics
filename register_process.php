@@ -34,8 +34,8 @@ if ($result->num_rows > 0) {
 }
 $stmt->close();
 
-// --- CAMBIO AQUÍ: Insertamos con estado 'pending' ---
-$status = 'pending';
+// La app es gratuita: toda cuenta nueva queda activa de entrada.
+$status = 'active';
 $stmt = $conn->prepare("INSERT INTO users (email, password_hash, mt5_token, subscription_status) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $email, $password_hash, $mt5_token, $status);
 

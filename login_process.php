@@ -1,6 +1,6 @@
 <?php
 
-// 0„3La sesi¨®n DEBE iniciarse en la primera l¨ªnea!
+// ï¿½0ï¿½3La sesiï¿½ï¿½n DEBE iniciarse en la primera lï¿½ï¿½nea!
 session_start(); 
 require 'api/db_connect.php';
 
@@ -13,15 +13,12 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 // 1. Buscar al usuario
-// 0„3MODIFICADO! Comparamos si la FECHA de expiraci¨®n es >= que la FECHA de hoy
 $stmt = $conn->prepare("
-    SELECT 
-        id, 
-        password_hash, 
-        subscription_status,
-        (subscription_expires_at >= CURDATE()) AS is_still_active
-    FROM users 
-    WHERE email = ? 
+    SELECT
+        id,
+        password_hash
+    FROM users
+    WHERE email = ?
     LIMIT 1
 ");
 $stmt->bind_param("s", $email);
@@ -31,32 +28,20 @@ $result = $stmt->get_result();
 if ($result->num_rows === 1) {
     $user = $result->fetch_assoc();
 
-    // 2. Verificar la contrase0Š9a
+    // 2. Verificar la contraseï¿½0ï¿½9a
     if (password_verify($password, $user['password_hash'])) {
-        // 0„30‡7xito! Contrase0Š9a correcta.
+        // ï¿½0ï¿½3ï¿½0ï¿½7xito! Contraseï¿½0ï¿½9a correcta.
         
-        // 3. Guardar el ID del usuario en la sesi¨®n
+        // 3. Guardar el ID del usuario en la sesiï¿½ï¿½n
         $_SESSION['user_id'] = $user['id'];
-        $_SESSION['email'] = $email; 
-        
-        // 4. --- 0„3L0ˆ7GICA DE VERIFICACI0ˆ7N CORREGIDA! ---
-        
-        // is_still_active ser¨¢ 1 (true) si la fecha es hoy o futura.
-        $is_valid_date = (isset($user['is_still_active']) && $user['is_still_active'] == 1);
+        $_SESSION['email'] = $email;
 
-        // 5. Redirigir
-        // Si el estado es 'active' Y la fecha ES v¨¢lida
-        if ($user['subscription_status'] === 'active' && $is_valid_date) {
-            header('Location: app.php');
-        } else {
-            // Si est¨¢ 'pending' O si est¨¢ 'active' pero expir¨®
-            header('Location: pago.php');
-        }
+        header('Location: app.php');
         exit;
     }
 }
 
-// Si algo falla (email no existe o contrase0Š9a incorrecta)
+// Si algo falla (email no existe o contraseï¿½0ï¿½9a incorrecta)
 header('Location: login.php?error=1');
 exit;
 ?>

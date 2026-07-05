@@ -13,46 +13,8 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// --- INICIO VERIFICACIÓN DE PAGO (CORREGIDO CON FECHAS) ---
-require_once 'api/db_connect.php'; 
-
-// ¡MODIFICADO! Comparamos si la FECHA de expiración es >= que la FECHA de hoy
-$stmt_pay_check = $conn->prepare("
-    SELECT 
-        subscription_status, 
-        (subscription_expires_at >= CURDATE()) AS is_still_active 
-    FROM users 
-    WHERE id = ?
-");
-$stmt_pay_check->bind_param("i", $user_id);
-$stmt_pay_check->execute();
-$res_pay_check = $stmt_pay_check->get_result();
-$user_pay_status = $res_pay_check->fetch_assoc();
-$stmt_pay_check->close();
-
-// is_still_active será 1 (true) si la fecha es hoy o futura
-$is_valid_date = (isset($user_pay_status['is_still_active']) && $user_pay_status['is_still_active'] == 1);
-
-// Si el estado NO es 'active' O SI la fecha NO es válida (expiró o es NULL)
-if ($user_pay_status['subscription_status'] !== 'active' || !$is_valid_date) {
-    
-    // Opcional: Si estaba 'active' pero expiró, lo actualizamos a 'pending'
-    if ($user_pay_status['subscription_status'] === 'active' && !$is_valid_date) {
-        $stmt_expire = $conn->prepare("UPDATE users SET subscription_status = 'pending' WHERE id = ?");
-        $stmt_expire->bind_param("i", $user_id);
-        $stmt_expire->execute();
-        $stmt_expire->close();
-    }
-    
-    $conn->close(); // Cerramos esta conexión
-    header('Location: pago.php');
-    exit;
-}
-// --- FIN VERIFICACIÓN DE PAGO ---
-
 // --- OBTENER TOKEN ---
-// Reemplaza 'api/db_connect.php' por tu ruta correcta
-require_once 'api/db_connect.php'; 
+require_once 'api/db_connect.php';
 $stmt = $conn->prepare("SELECT mt5_token FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
