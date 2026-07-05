@@ -1,0 +1,324 @@
+[12-Nov-2025 20:22:00 UTC] PHP Warning:  require(db_connect.php): Failed to open stream: No such file or directory in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 20:22:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db_connect.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bbrpkihlil/trademetrics.online/register_process.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 20:22:13 UTC] PHP Warning:  require(db_connect.php): Failed to open stream: No such file or directory in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 20:22:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db_connect.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bbrpkihlil/trademetrics.online/register_process.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 20:24:29 UTC] PHP Warning:  require(db_connect.php): Failed to open stream: No such file or directory in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 20:24:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db_connect.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bbrpkihlil/trademetrics.online/register_process.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 20:24:52 UTC] PHP Warning:  require(db_connect.php): Failed to open stream: No such file or directory in /home/bbrpkihlil/trademetrics.online/login_process.php on line 5
+[12-Nov-2025 20:24:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db_connect.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bbrpkihlil/trademetrics.online/login_process.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/login_process.php on line 5
+[12-Nov-2025 20:25:01 UTC] PHP Warning:  require(db_connect.php): Failed to open stream: No such file or directory in /home/bbrpkihlil/trademetrics.online/login_process.php on line 5
+[12-Nov-2025 20:25:01 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db_connect.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bbrpkihlil/trademetrics.online/login_process.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/login_process.php on line 5
+[12-Nov-2025 20:25:18 UTC] PHP Warning:  require(db_connect.php): Failed to open stream: No such file or directory in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 20:25:18 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db_connect.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/bbrpkihlil/trademetrics.online/register_process.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/register_process.php on line 2
+[12-Nov-2025 22:32:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/bbrpkihlil/trademetrics.online/app.php on line 20
+[12-Nov-2025 22:32:30 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/bbrpkihlil/trademetrics.online/app.php on line 20
+[12-Nov-2025 22:34:25 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/bbrpkihlil/trademetrics.online/app.php on line 20
+[12-Nov-2025 22:37:03 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/bbrpkihlil/trademetrics.online/app.php on line 20
+[12-Nov-2025 22:41:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/bbrpkihlil/trademetrics.online/app.php on line 20
+[12-Nov-2025 22:49:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/bbrpkihlil/trademetrics.online/app.php on line 20
+[02-Dec-2025 01:09:42 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:09:46 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:09:51 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:10:43 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:10:53 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:10:59 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:11:10 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:11:44 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:14:11 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 01:14:46 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:37:30 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:40:05 UTC] PHP Warning:  Undefined array key "user_id" in /home/bbrpkihlil/trademetrics.online/app.php on line 6
+[02-Dec-2025 02:40:05 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/app.php(9): require_once('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:40:06 UTC] PHP Warning:  Undefined array key "user_id" in /home/bbrpkihlil/trademetrics.online/app.php on line 6
+[02-Dec-2025 02:40:06 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/app.php(9): require_once('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:40:07 UTC] PHP Warning:  Undefined array key "user_id" in /home/bbrpkihlil/trademetrics.online/app.php on line 6
+[02-Dec-2025 02:40:07 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/app.php(9): require_once('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:40:08 UTC] PHP Warning:  Undefined array key "user_id" in /home/bbrpkihlil/trademetrics.online/app.php on line 6
+[02-Dec-2025 02:40:08 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/app.php(9): require_once('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:40:10 UTC] PHP Warning:  Undefined array key "user_id" in /home/bbrpkihlil/trademetrics.online/app.php on line 6
+[02-Dec-2025 02:40:10 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/app.php(9): require_once('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:40:14 UTC] PHP Warning:  Undefined array key "user_id" in /home/bbrpkihlil/trademetrics.online/app.php on line 6
+[02-Dec-2025 02:40:14 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/app.php(9): require_once('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:40:51 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:42:09 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:42:10 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:47:43 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 02:54:34 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(4): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:00:21 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(7): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:00:32 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(7): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:00:34 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(7): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:00:39 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_usertugasto'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(7): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:04:26 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_users'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(5): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:04:28 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_users'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(5): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:04:33 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_users'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(5): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 03:05:53 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_users'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(5): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 11:28:19 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_users'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(5): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[02-Dec-2025 23:02:22 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'bbrpkihlil_trademetrics_users'@'localhost' (using password: YES) in /home/bbrpkihlil/trademetrics.online/api/db_connect.php:13
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/api/db_connect.php(13): mysqli->__construct()
+#1 /home/bbrpkihlil/trademetrics.online/login_process.php(5): require('/home/bbrpkihli...')
+#2 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/api/db_connect.php on line 13
+[16-Jan-2026 19:30:23 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:488
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(488): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 488
+[16-Jan-2026 19:30:31 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:488
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(488): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 488
+[16-Jan-2026 19:33:28 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:487
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(487): mysqli->query()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 487
+[16-Jan-2026 19:33:31 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:487
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(487): mysqli->query()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 487
+[16-Jan-2026 19:34:11 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:498
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(498): mysqli->query()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 498
+[16-Jan-2026 19:37:48 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:487
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(487): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 487
+[16-Jan-2026 19:39:23 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:487
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(487): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 487
+[16-Jan-2026 19:40:36 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:483
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(483): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 483
+[16-Jan-2026 19:40:44 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:483
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(483): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 483
+[25-Jan-2026 18:27:01 UTC] PHP Warning:  Undefined variable $conn in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[25-Jan-2026 18:27:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/bbrpkihlil/trademetrics.online/app.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[25-Jan-2026 18:27:02 UTC] PHP Warning:  Undefined variable $conn in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[25-Jan-2026 18:27:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/bbrpkihlil/trademetrics.online/app.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[25-Jan-2026 18:27:40 UTC] PHP Warning:  Undefined variable $conn in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[25-Jan-2026 18:27:40 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/bbrpkihlil/trademetrics.online/app.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[25-Jan-2026 18:27:42 UTC] PHP Warning:  Undefined variable $conn in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[25-Jan-2026 18:27:42 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/bbrpkihlil/trademetrics.online/app.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 17
+[27-Jan-2026 23:53:05 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'last_account_tag' in 'SELECT' in /home/bbrpkihlil/trademetrics.online/app.php:22
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(22): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 22
+[27-Jan-2026 23:53:06 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'last_account_tag' in 'SELECT' in /home/bbrpkihlil/trademetrics.online/app.php:22
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(22): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 22
+[27-Jan-2026 23:53:10 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'last_account_tag' in 'SELECT' in /home/bbrpkihlil/trademetrics.online/app.php:22
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(22): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 22
+[28-Jan-2026 22:45:00 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:67
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(67): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 67
+[28-Jan-2026 22:45:02 UTC] PHP Fatal error:  Uncaught Error: mysqli object is already closed in /home/bbrpkihlil/trademetrics.online/app.php:67
+Stack trace:
+#0 /home/bbrpkihlil/trademetrics.online/app.php(67): mysqli->prepare()
+#1 {main}
+  thrown in /home/bbrpkihlil/trademetrics.online/app.php on line 67
