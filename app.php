@@ -266,23 +266,86 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .modal .btn { width: 100%; margin-top: 10px;box-shadow: 0 0 10px #16ff0045}
   .small {font-size: 13px;color: var(--muted);}
 
-  /* Media query para pantallas muy pequeñas (Móvil vertical) */
+  /* ======================================================
+     MODO MÓVIL: no es solo "que no desborde", sino reducir
+     densidad real (paddings, tipografía, alto de gráficos)
+     para que no se sienta un dashboard de PC encogido.
+     ====================================================== */
   @media (max-width: 768px) {
       body { padding-left: 0; padding-bottom: 60px; }
       .sidebar { width: 100%; height: 60px; bottom: 0; top: auto; flex-direction: row; justify-content: space-around; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
       .sidebar-logo { display: none; }
       .nav-item { margin-bottom: 0; }
       .nav-item::after { display: none; }
-      .wrap { width: 92%; margin-left: auto; margin-right: auto; }
-      header h1 { font-size: 24px; }
-      header { margin-left: 0 !important; }
-      header img { width: 56px; height: 56px; }
-      header h1 span:first-child { font-size: 26px !important; }
+      .wrap { width: 94%; margin: 12px auto 0 auto; padding-right: 0; }
 
-      /* Los gráficos con alto fijo grande (550/500/400px) quedaban desproporcionados en celular */
-      .chart-container .card[style*="height: 550px"] { height: 380px !important; }
+      /* --- Header compacto --- */
+      header { margin-left: 0 !important; margin-bottom: 4px; gap: 10px; }
+      header img { width: 40px; height: 40px; }
+      header h1 span:first-child { font-size: 20px !important; }
+      header .small { display: none; } /* bajada descriptiva: ruido en pantalla chica */
+
+      /* --- Menos aire por todos lados --- */
+      .card { padding: 10px; }
+      .row-container { gap: 10px; margin-top: 10px; }
+      .grid { gap: 10px; }
+      .metric { padding: 8px; }
+      .metric b { font-size: 15px; }
+      .metric small, .metric .small { font-size: 11px; }
+
+      /* Títulos de sección/gráfico: en desktop varían entre 27px, 1.17em, etc. */
+      .card h3, .chart-card-content h3 { font-size: 0.95rem !important; margin-bottom: 8px !important; }
+
+      /* Esto era un salto de 150px entre secciones que en un celular es media pantalla vacía */
+      .row-container[style*="margin-top: 150px"] { margin-top: 24px !important; }
+
+      /* Gráficos: menos alto fijo, siguen siendo legibles */
+      .chart-container .card[style*="height: 550px"] { height: 300px !important; }
       .row-container .card[style*="min-height: 500px"],
-      .row-container .card[style*="min-height: 400px"] { min-height: 320px !important; }
+      .row-container .card[style*="min-height: 400px"] { min-height: 260px !important; }
+      .row-container .card[style*="min-height: 300px"] { min-height: 220px !important; }
+
+      /* Filas título+dato en flex (ej. "Estadísticas..." / "Operaciones totales") no envolvían */
+      [style*="justify-content:space-between"] { flex-wrap: wrap; row-gap: 4px; }
+
+      /* Filtros: selects apilados y a todo el ancho en vez de 150px fijo apretado */
+      .filter-controls, .sort-controls { flex-direction: column; align-items: stretch; gap: 4px; margin-top: 8px; }
+      .filter-controls label, .sort-controls label { margin-bottom: 2px !important; }
+      .filter-controls select, .sort-controls select, .filter-controls input, .sort-controls input { width: 100%; }
+
+      /* Ticker más angosto */
+      .ticker-item { font-size: 12px; padding: 0 10px; }
+
+      /* --- Tabla de trades: de tabla-con-scroll a tarjetas apiladas --- */
+      #tableContainer { overflow-x: visible; }
+      #tradesTable thead { display: none; }
+      #tradesTable, #tradesTable tbody, #tradesTable tr { display: block; width: 100%; }
+      #tradesTable { min-width: 0; }
+      #tradesTable tr {
+          background: var(--glass);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 8px;
+          padding: 8px 10px;
+          margin-bottom: 8px;
+      }
+      #tradesTable td {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+          border-bottom: 1px dashed rgba(255,255,255,0.05);
+          padding: 5px 0;
+          font-size: 13px;
+          text-align: right;
+      }
+      #tradesTable td:last-child { border-bottom: none; }
+      #tradesTable td::before {
+          content: attr(data-label);
+          color: var(--muted);
+          font-weight: 600;
+          text-align: left;
+          margin-right: auto;
+      }
   }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -1104,14 +1167,14 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
             }
 
             trEl.innerHTML = `
-                <td>${escapeHtml(tx.ticket)}</td>
-                <td>${escapeHtml(tx.timestamp)}</td>
-                <td>${escapeHtml(typeDisplay)}</td>
-                <td>${escapeHtml(tx.symbol) || '—'}</td>
-                <td>${amountCellHtml}</td>
-                <td>${fmt(tx.balance_after, 2)}</td>
-                <td>${riskHtml}</td>
-                <td>${rMultipleHtml}</td>
+                <td data-label="Ticket">${escapeHtml(tx.ticket)}</td>
+                <td data-label="Fecha/Hora">${escapeHtml(tx.timestamp)}</td>
+                <td data-label="Tipo">${escapeHtml(typeDisplay)}</td>
+                <td data-label="Símbolo">${escapeHtml(tx.symbol) || '—'}</td>
+                <td data-label="Monto ($)">${amountCellHtml}</td>
+                <td data-label="Balance ($)">${fmt(tx.balance_after, 2)}</td>
+                <td data-label="Riesgo ($)">${riskHtml}</td>
+                <td data-label="R-Múltiple">${rMultipleHtml}</td>
             `;
             tbody.appendChild(trEl);
         });

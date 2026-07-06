@@ -259,10 +259,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="max-w-7xl mx-auto px-6 py-8 calendar-wrapper">
         <header class="flex flex-col md:flex-row justify-between items-center mb-6 border-b border-white/10 pb-4">
             <div class="mb-4 md:mb-0">
-                <h1 class="text-3xl font-bold text-white">Diario de Emociones</h1>
+                <h1 class="text-2xl md:text-3xl font-bold text-white">Diario de Emociones</h1>
                 <p class="text-[#9aa4b2] text-sm mt-1">Registra tu psicología mes a mes.</p>
             </div>
-            <div class="flex space-x-4 text-xs md:text-sm bg-[#161a22] p-3 rounded-lg border border-white/5">
+            <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs md:text-sm bg-[#161a22] p-3 rounded-lg border border-white/5">
                 <div class="flex items-center"><div class="w-3 h-3 bg-[#0ea600]/30 border border-[#0ea600] rounded-sm mr-2"></div> Ganador</div>
                 <div class="flex items-center"><div class="w-3 h-3 bg-[#ff6b6b]/30 border border-[#ff6b6b] rounded-sm mr-2"></div> Perdedor</div>
                 <div class="flex items-center"><i class="fa-solid fa-bed text-[#9aa4b2] mr-2"></i> Sin Operar</div>
