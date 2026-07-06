@@ -746,6 +746,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const API_URL = 'api/';
     const CSRF_TOKEN = <?= json_encode($csrfToken) ?>;
+    // En celular no queremos los puntitos sobre las líneas de los gráficos (equity, drawdown, PnL mensual).
+    const isMobileViewport = () => window.innerWidth <= 768;
 
     // NUEVO: Cargar lista de cuentas (account_tag)
     const loadAccounts = async function() {
@@ -1205,7 +1207,7 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
                            fill: true,
                            tension: 0.3,                 // Suaviza la línea igual que la otra
                             borderWidth: 2,               // Grosor de línea 2
-                            pointRadius: 3,               // Muestra los puntos
+                            pointRadius: isMobileViewport() ? 0 : 3,
                             pointBackgroundColor: "#3b82f6", // Color del punto (Azul)
                             pointHoverRadius: 5, 
                             pointHitRadius: 10, // Efecto al pasar el mouse
@@ -1505,9 +1507,9 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
                     borderColor: COLOR_DANGER_HEX,
                     backgroundColor: 'rgba(255, 107, 107, 0.2)', // Área roja semitransparente
                     fill: true,
-                    borderWidth: 2,              
-                    pointRadius: 3,             
-                    pointBackgroundColor: COLOR_DANGER_HEX, 
+                    borderWidth: 2,
+                    pointRadius: isMobileViewport() ? 0 : 3,
+                    pointBackgroundColor: COLOR_DANGER_HEX,
                     pointHoverRadius: 5,        
                     tension: 0.3
                 }]
@@ -1687,10 +1689,14 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
                     borderColor: "#3b82f6",
                     backgroundColor: "rgba(59, 130, 246, 0.12)",
                     fill: true,
-                    tension: 0.1
+                    tension: 0.1,
+                    pointRadius: isMobileViewport() ? 0 : 3
                 }]
             },
-            options: { scales: {
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
             x: {
                 title: { display: true, text: 'PnL Mensual de la cuenta', color: COLOR_MUTED },
                 ticks: { color: COLOR_MUTED },
