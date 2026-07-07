@@ -212,7 +212,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         /* En celular, la sidebar fija de 80px pasa a ser una barra inferior (igual que app.php) */
         @media (max-width: 768px) {
-            body { padding-left: 0; padding-bottom: 60px; }
+            /* La barra mide 60px, pero le dejamos más margen del justo para que el
+               contenido no quede tapado por la barra (z-index:2000) al llegar al final. */
+            body { padding-left: 0; padding-bottom: 90px; }
             .sidebar {
                 width: 100%; height: 60px; top: auto; bottom: 0;
                 flex-direction: row; justify-content: space-around; align-items: center;

@@ -281,7 +281,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      para que no se sienta un dashboard de PC encogido.
      ====================================================== */
   @media (max-width: 768px) {
-      body { padding-left: 0; padding-bottom: 60px; }
+      /* La barra de abajo mide 60px, pero le dejamos más margen del justo:
+         el footer/Ayuda quedaba tapado por la barra (z-index:2000) al
+         llegar al final de la página. */
+      body { padding-left: 0; padding-bottom: 90px; }
       .sidebar { width: 100%; height: 60px; bottom: 0; top: auto; flex-direction: row; justify-content: space-around; align-items: center; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
       .sidebar-logo { display: none; }
       /* .nav-item.logout tiene margin-bottom:45px para separarlo en la barra vertical de
@@ -289,6 +292,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
          solo, así que hay que igualar el selector para poder pisarlo acá. */
       .nav-item, .nav-item.logout { margin-bottom: 0; }
       .nav-item::after { display: none; }
+      footer { margin-bottom: 16px; }
       .wrap { width: 94%; margin: 12px auto 0 auto; padding-right: 0; }
 
       /* Por debajo de este breakpoint, siempre 1 columna (ya viene bastante
@@ -313,9 +317,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       /* Títulos de sección/gráfico: en desktop varían entre 27px, 1.17em, etc. */
       .card h3, .chart-card-content h3 { font-size: 0.95rem !important; margin-bottom: 8px !important; }
-
-      /* Esto era un salto de 150px entre secciones que en un celular es media pantalla vacía */
-      .row-container[style*="margin-top: 150px"] { margin-top: 24px !important; }
 
       /* Gráficos: menos alto fijo, siguen siendo legibles */
       .chart-container .card[style*="height: 550px"] { height: 300px !important; }
@@ -555,7 +556,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
-    <div class="row-container grid-dual-charts" style="margin-top: 150px;">
+    <div class="row-container grid-dual-charts">
         
         <div class="card" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); min-height: 400px; padding:10px;"> 
             <div class="chart-card-content">
