@@ -87,9 +87,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   header{display:flex;align-items:center;gap:18px;margin-bottom:10px; flex-wrap: wrap;}
   header h1{margin:0;font-size: clamp(24px, 2.5vw, 30px); letter-spacing:0.2px} 
   
-  .grid{display:grid;grid-template-columns: 1fr;gap:18px}
-  
-  .card{background:var(--card);padding:14px;border-radius:10px; box-sizing: border-box;}
+  .grid{display:grid;grid-template-columns: minmax(0, 1fr);gap:18px}
+
+  .card{background:var(--card);padding:14px;border-radius:10px; box-sizing: border-box; min-width: 0;}
   
   /* Inputs y controles */
   label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
@@ -113,10 +113,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       margin-top: 10px;
   }
 
-  /* Antes esto era un inline-style fijo a 3 columnas: en celular quedaban tarjetas de ~100px */
-  .metrics-3col { grid-template-columns: repeat(3, 1fr); }
-  @media (max-width: 700px) { .metrics-3col { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 420px) { .metrics-3col { grid-template-columns: 1fr; } }
+  /* Antes esto era un inline-style fijo a 3 columnas: en celular quedaban tarjetas de ~100px.
+     Fluida en vez de breakpoints fijos: reacomoda sola en cualquier ancho intermedio. */
+  .metrics-3col { grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); }
 
   .ticker-item.up .arrow { color: var(--accent); }
   .ticker-item.down .arrow { color: var(--danger); }
@@ -148,45 +147,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
   
 
+  /*
+     IMPORTANTE: "1fr" solo (sin minmax) deja que el track tome como
+     mínimo implícito el ancho del contenido más grande que tenga
+     adentro (típicamente un <canvas> de Chart.js ya redimensionado
+     por JS). Eso es lo que "traba" el layout al achicar la ventana
+     de forma gradual con el inspector: el canvas ya tiene un ancho
+     en px fijado, ese ancho pasa a ser el mínimo del grid, y el grid
+     deja de poder achicarse más allá de ese punto (con overflow y
+     recortes). Si entrás directo en un viewport angosto no se nota
+     porque el canvas nunca llegó a medir "ancho". minmax(0, 1fr)
+     anula ese mínimo implícito y permite que el track se achique
+     siempre, sea cual sea el contenido de adentro. */
+
   /* CLASE EXISTENTE: Para dividir gráfico Pie (izq) y Métricas (der) */
   .grid-split-dashboard {
-      grid-template-columns: 1fr; 
+      grid-template-columns: minmax(0, 1fr);
   }
-  @media (min-width: 1200px) { 
+  @media (min-width: 1200px) {
       .grid-split-dashboard {
-          grid-template-columns: 320px 1fr 320px; 
+          grid-template-columns: clamp(220px, 20vw, 320px) minmax(0, 1fr) clamp(220px, 20vw, 320px);
       }
   }
 
-  /* CLASE EXISTENTE: Para gráficos lado a lado (50% / 50%) */
+  /* CLASE EXISTENTE: Para gráficos lado a lado — fluida: pasa de 1 a 2
+     columnas apenas hay espacio para dos de ~320px, sin salto fijo a 1024px */
   .grid-dual-charts {
-      grid-template-columns: 1fr; 
+      grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   }
-  @media (min-width: 1024px) { 
-      .grid-dual-charts {
-          grid-template-columns: 1fr 1fr;
-      }
-  }
-  
+
   /* --- CLASE NUEVA: Para 25% | 25% | 50% --- */
   .grid-triple-split {
-      grid-template-columns: 1fr; /* Móvil: Apilado */
+      grid-template-columns: minmax(0, 1fr); /* Móvil: Apilado */
   }
   @media (min-width: 1200px) { /* Monitor grande */
       .grid-triple-split {
           /* 1fr 1fr 2fr = 25% 25% 50% */
-          grid-template-columns: 1fr 1fr 2fr;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
       }
   }
 
-  /* Nueva clase para tres columnas iguales (Distribución, Radar, Día de Semana) */
+  /* Tres columnas iguales (Distribución, Radar, Día de Semana) — misma
+     lógica fluida que grid-dual-charts, sin salto fijo a 1024px */
   .grid-triple-charts {
-      grid-template-columns: 1fr; /* Móvil: Apilado */
-  }
-  @media (min-width: 1024px) { 
-      .grid-triple-charts {
-          grid-template-columns: 1fr 1fr 1fr; /* Partes iguales en desktop */
-      }
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   }
   /* ------------------------------------------- */
 
@@ -207,8 +211,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   a.nav-item { text-decoration: none; display: flex; align-items: center; justify-content: center; }
 
   /* Helpers */
-  .chart-card-content { height: 100%; display: flex; flex-direction: column; }
-  .chart { flex-grow: 1; height: auto; min-height: 100px; display: flex; align-items: center; justify-content: center; }
+  .chart-card-content { height: 100%; display: flex; flex-direction: column; min-width: 0; }
+  /* Mismo problema que minmax(0,1fr) pero en flexbox: un hijo con flex-grow en un
+     flex-column tiene min-height:auto por defecto, y no se achica por debajo del alto
+     que Chart.js ya le dio al canvas. min-height:0 se lo permite. */
+  .chart-card-content > div { min-height: 0; min-width: 0; }
+  .chart-card-content canvas { max-width: 100%; }
+  .chart { flex-grow: 1; height: auto; min-height: 100px; display: flex; align-items: center; justify-content: center; min-width: 0; }
   footer{margin-top:16px;color:var(--muted);font-size:13px}
   .help{font-size:13px;color:var(--muted);line-height:1.4}
   
@@ -278,6 +287,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .nav-item { margin-bottom: 0; }
       .nav-item::after { display: none; }
       .wrap { width: 94%; margin: 12px auto 0 auto; padding-right: 0; }
+
+      /* Por debajo de este breakpoint, siempre 1 columna (ya viene bastante
+         angosto, no vale la pena que auto-fit intente 2 en fila) */
+      .grid-dual-charts, .grid-triple-charts, .metrics-3col {
+          grid-template-columns: minmax(0, 1fr) !important;
+      }
 
       /* --- Header compacto --- */
       header { margin-left: 0 !important; margin-bottom: 4px; gap: 10px; }
@@ -523,7 +538,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
     </div>
 
-    <div class="row-container" style="display: grid; margin-top: 8px; grid-template-columns: 1fr; gap: 18px;">
+    <div class="row-container" style="display: grid; margin-top: 8px; grid-template-columns: minmax(0, 1fr); gap: 18px;">
         <div class="chart-container">
             <div class="card" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)); padding:10px; height: 550px;">
                 <div class="chart-card-content">
@@ -1900,6 +1915,15 @@ const calmar = (maxDDpct === 0 || maxDDpct < 0.01 || !isFinite(annualizedReturn)
     if (sortSelector) {
         sortSelector.style.display = 'none'; // Ocultar
     }
+
+    // Reflow de gráficos ante cualquier resize del contenedor (no solo el resize interno
+    // de Chart.js): además de recalcular tamaños, esto mantiene sincronizado el pointRadius
+    // móvil/desktop (isMobileViewport) si cruzás el breakpoint arrastrando el inspector.
+    let resizeRenderTimeout = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeRenderTimeout);
+        resizeRenderTimeout = setTimeout(() => { renderAll(); }, 150);
+    });
 
     // --- Calculadora de Posición ELIMINADA ---
     
