@@ -88,6 +88,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .nav-item:hover::after { opacity: 1; visibility: visible; }
         .nav-item.logout {margin-bottom: 45px; color: var(--danger); }
         .nav-item.logout:hover { background: rgba(255, 107, 107, 0.15); }
+        /* En escritorio no ocupa lugar; en la barra móvil sí, para alinear con app.php */
+        .nav-item-ghost { display: none; }
 
         /* --- TARJETAS CALENDARIO --- */
         .day-card { 
@@ -212,11 +214,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         /* En celular, la sidebar fija de 80px pasa a ser una barra inferior (igual que app.php) */
         @media (max-width: 768px) {
-            /* La barra mide 60px, pero le dejamos más margen del justo para que el
-               contenido no quede tapado por la barra (z-index:2000) al llegar al final. */
+            /* La barra mide 56px (igual que app.php), pero le dejamos más margen del justo
+               en el body para que el contenido no quede tapado por la barra (z-index:2000)
+               al llegar al final. */
             body { padding-left: 0; padding-bottom: 90px; }
             .sidebar {
-                width: 100%; height: 60px; top: auto; bottom: 0;
+                width: 100%; height: 56px; top: auto; bottom: 0;
                 flex-direction: row; justify-content: space-around; align-items: center;
                 border-right: none; border-top: 1px solid rgba(255,255,255,0.05);
             }
@@ -225,6 +228,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                de escritorio; hay que igualar el selector para poder pisarlo acá. */
             .nav-item, .nav-item.logout { margin-bottom: 0; }
             .nav-item::after { display: none; }
+            /* Ocupa el mismo espacio que un ícono real, pero invisible: alinea los íconos
+               con los de app.php (que sí tiene botón de Configuración en ese lugar). */
+            .nav-item-ghost { display: flex; visibility: hidden; pointer-events: none; }
             .calendar-wrapper { width: 94%; }
         }
 
@@ -247,6 +253,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="diario.php" class="nav-item active" data-tooltip="Diario">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
         </a>
+
+        <!-- Espacio "fantasma": diario.php no tiene botón de Configuración, pero en la barra
+             inferior de celular lo dejamos reservado y oculto para que los íconos queden
+             alineados igual que en app.php (en escritorio no ocupa lugar). -->
+        <div class="nav-item nav-item-ghost" aria-hidden="true"></div>
 
         <button class="nav-item logout" id="navLogout" data-tooltip="Cerrar Sesión">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

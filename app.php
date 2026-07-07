@@ -217,7 +217,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      que Chart.js ya le dio al canvas. min-height:0 se lo permite. */
   .chart-card-content > div { min-height: 0; min-width: 0; }
   .chart-card-content canvas { max-width: 100%; }
-  .chart { flex-grow: 1; height: auto; min-height: 100px; display: flex; align-items: center; justify-content: center; min-width: 0; }
   footer{margin-top:16px;color:var(--muted);font-size:13px}
   .help{font-size:13px;color:var(--muted);line-height:1.4}
   
@@ -285,7 +284,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
          el footer/Ayuda quedaba tapado por la barra (z-index:2000) al
          llegar al final de la página. */
       body { padding-left: 0; padding-bottom: 90px; }
-      .sidebar { width: 100%; height: 60px; bottom: 0; top: auto; flex-direction: row; justify-content: space-around; align-items: center; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
+      .sidebar { width: 100%; height: 56px; bottom: 0; top: auto; flex-direction: row; justify-content: space-around; align-items: center; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
       .sidebar-logo { display: none; }
       /* .nav-item.logout tiene margin-bottom:45px para separarlo en la barra vertical de
          escritorio; ".nav-item.logout" (2 clases) le gana en especificidad a ".nav-item"
@@ -549,7 +548,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="card" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)); padding:10px; height: 550px;">
                 <div class="chart-card-content">
                     <div style="margin-bottom: 15px; font-size: 1.17em; font-weight: bold; color: #e6eef6;" class="small">Curva de Equity</div>
-                    <canvas id="equityChart" class="chart"></canvas>
+                    <div style="position: relative; flex-grow: 1;"><canvas id="equityChart"></canvas></div>
                     <div style="margin-top:8px" class="small">Retorno Total: <b id="totalReturn_footer">—</b> | R-Corregido (avg R/operación): <b id="rCorrected_footer">—</b></div>
                 </div>
             </div>
