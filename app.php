@@ -282,9 +282,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      ====================================================== */
   @media (max-width: 768px) {
       body { padding-left: 0; padding-bottom: 60px; }
-      .sidebar { width: 100%; height: 60px; bottom: 0; top: auto; flex-direction: row; justify-content: space-around; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
+      .sidebar { width: 100%; height: 60px; bottom: 0; top: auto; flex-direction: row; justify-content: space-around; align-items: center; border-right: none; border-top: 1px solid rgba(255,255,255,0.05); }
       .sidebar-logo { display: none; }
-      .nav-item { margin-bottom: 0; }
+      /* .nav-item.logout tiene margin-bottom:45px para separarlo en la barra vertical de
+         escritorio; ".nav-item.logout" (2 clases) le gana en especificidad a ".nav-item"
+         solo, así que hay que igualar el selector para poder pisarlo acá. */
+      .nav-item, .nav-item.logout { margin-bottom: 0; }
       .nav-item::after { display: none; }
       .wrap { width: 94%; margin: 12px auto 0 auto; padding-right: 0; }
 

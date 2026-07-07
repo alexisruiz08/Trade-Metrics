@@ -215,11 +215,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             body { padding-left: 0; padding-bottom: 60px; }
             .sidebar {
                 width: 100%; height: 60px; top: auto; bottom: 0;
-                flex-direction: row; justify-content: space-around;
+                flex-direction: row; justify-content: space-around; align-items: center;
                 border-right: none; border-top: 1px solid rgba(255,255,255,0.05);
             }
             .sidebar-logo { display: none; }
-            .nav-item { margin-bottom: 0; }
+            /* .nav-item.logout tiene margin-bottom:45px para separarlo en la barra vertical
+               de escritorio; hay que igualar el selector para poder pisarlo acá. */
+            .nav-item, .nav-item.logout { margin-bottom: 0; }
             .nav-item::after { display: none; }
             .calendar-wrapper { width: 94%; }
         }
