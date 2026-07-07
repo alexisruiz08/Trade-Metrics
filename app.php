@@ -332,11 +332,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .ticker-item { font-size: 12px; padding: 0 10px; }
 
       /* --- Tabla de trades: de tabla-con-scroll a tarjetas apiladas --- */
-      #tableContainer { overflow-x: visible; }
       #tradesTable thead { display: none; }
       #tradesTable, #tradesTable tbody, #tradesTable tr { display: block; width: 100%; }
       #tradesTable { min-width: 0; }
       #tradesTable tr {
+          box-sizing: border-box;
+          width: 100%;
           background: var(--glass);
           border: 1px solid rgba(255,255,255,0.06);
           border-radius: 8px;
@@ -344,6 +345,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           margin-bottom: 8px;
       }
       #tradesTable td {
+          box-sizing: border-box;
           display: flex;
           justify-content: space-between;
           align-items: center;
